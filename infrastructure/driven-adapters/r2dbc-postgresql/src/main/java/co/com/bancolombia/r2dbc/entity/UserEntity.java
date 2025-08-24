@@ -7,6 +7,8 @@ import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Table;
 
+import java.util.Date;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -24,4 +26,6 @@ public class UserEntity {
     private String telefono;
     private Integer idRol;
     private Double salarioBase;
+    private Date fechaNacimiento;
+    private String direccion;
 }

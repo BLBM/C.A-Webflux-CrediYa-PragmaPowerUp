@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -20,4 +22,6 @@ public class UserRequest {
     private Integer idRol;
     @Schema(description = "Salario base del usuario", example = "2000000")
     private Double salarioBase;
+    private Date fechaNacimiento;
+    private String direccion;
 }

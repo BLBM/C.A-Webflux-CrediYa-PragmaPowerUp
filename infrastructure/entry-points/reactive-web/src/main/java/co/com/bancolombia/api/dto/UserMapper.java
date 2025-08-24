@@ -9,8 +9,11 @@ public class UserMapper {
                 dto.getApellido(),
                 dto.getEmail(),
                 dto.getDocumentoIdentidad(),
+                dto.getIdRol(),
                 dto.getTelefono(),
-                dto.getSalarioBase()
+                dto.getSalarioBase(),
+                dto.getDireccion(),
+                dto.getFechaNacimiento()
         );
     }
 }

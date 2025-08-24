@@ -1,14 +1,15 @@
 package co.com.bancolombia.r2dbc.userRepository;
 
+
 import co.com.bancolombia.model.user.User;
 import co.com.bancolombia.model.user.gateways.UserRepository;
 import co.com.bancolombia.r2dbc.entity.UserEntity;
 import co.com.bancolombia.r2dbc.helper.ReactiveAdapterOperations;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.reactivecommons.utils.ObjectMapper;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.reactive.TransactionalOperator;
+
 import reactor.core.publisher.Mono;
 
 @Slf4j
@@ -30,13 +31,14 @@ public class UserReactiveRepositoryAdapter extends ReactiveAdapterOperations<
 
     @Override
     public Mono<User> save(User usuario) {
-        log.info("Guardando usuario con transacción: {}", usuario);
         return repository.save(toData(usuario))
                 .map(this::toEntity)
                 .as(txOperator::transactional)
-                .doOnSuccess(saved -> log.info("Usuario guardado en BD: {}", saved))
-                .doOnError(e -> log.error("Error guardando usuario: {}", usuario, e));
+                .doOnSuccess(saved -> log.info("Usuario guardado: {}", saved))
+                .doOnError(e -> log.error("Error guardando usuario: {}", usuario));
     }
+
+
 
 
     @Override
