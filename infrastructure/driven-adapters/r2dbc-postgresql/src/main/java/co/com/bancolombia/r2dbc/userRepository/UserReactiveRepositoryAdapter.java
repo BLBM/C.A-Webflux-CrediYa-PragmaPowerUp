@@ -14,8 +14,8 @@ import reactor.core.publisher.Mono;
 @Slf4j
 @Repository
 public class UserReactiveRepositoryAdapter extends ReactiveAdapterOperations<
-        User/* change for domain model */,
-        UserEntity/* change for adapter model */,
+        User,
+        UserEntity,
         String,
         UserReactiveRepository
 > implements UserRepository {
@@ -33,7 +33,7 @@ public class UserReactiveRepositoryAdapter extends ReactiveAdapterOperations<
         log.info("Guardando usuario con transacción: {}", usuario);
         return repository.save(toData(usuario))
                 .map(this::toEntity)
-                .as(txOperator::transactional) // 🔥 atomicidad
+                .as(txOperator::transactional)
                 .doOnSuccess(saved -> log.info("Usuario guardado en BD: {}", saved))
                 .doOnError(e -> log.error("Error guardando usuario: {}", usuario, e));
     }

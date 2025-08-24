@@ -29,7 +29,7 @@ public class User {
             throw new DomainException("El correo electrónico no es válido");
         if (salarioBase == null)
             throw new DomainException("El salario base no puede ser nulo");
-        if (salarioBase <= 0 || salarioBase > 15000000)  // 👈 aquí ya no permites 0
+        if (salarioBase <= 0 || salarioBase > 15000000)
             throw new DomainException("El salario base debe estar entre 1 y 15000000");
 
         this.nombre = nombre;
