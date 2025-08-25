@@ -3,9 +3,6 @@ server:
 spring:
   application:
     name: "CrediYa"
-  swagger-ui:
-    path: /swagger-ui.html
-    enabled: true
   datasource:
     initialization-mode: "always"
   devtools:
@@ -16,6 +13,17 @@ spring:
       path: "/h2"
   profiles:
     include: null
+
+springdoc:
+  api-docs:
+    enabled: true
+    path: /v3/api-docs
+  swagger-ui:
+    enabled: true
+    path: /swagger-ui.html
+    operationsSorter: method
+    tagsSorter: alpha
+
 management:
   endpoints:
     web:

@@ -1,19 +1,22 @@
-package co.com.bancolombia.model.user;
+package co.com.bancolombia.model.usuario;
 
 import co.com.bancolombia.model.exceptions.DomainException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+
 import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class UserTest {
+@SpringBootTest
+class UsuarioTest {
 
     @Test
     @DisplayName("Crear usuario cuando los campos son correctos")
     void createValidUser(){
         Date fecha = new Date();
-        User user = User.builder()
+        Usuario user = Usuario.builder()
                 .nombre("Agustina")
                 .apellido("Mills")
                 .email("test@mail.com")
@@ -40,9 +43,9 @@ public class UserTest {
     @Test
     @DisplayName("verificar que nombre no sea null")
     void createUserWithoutNombreShouldFail(){
+        Date fecha = new Date();
         DomainException exception = assertThrows(DomainException.class, () -> {
-            Date fecha = new Date();
-            new User(
+            new Usuario(
                     null,
                     "Mills",
                     "test@gmail.com",
@@ -61,9 +64,9 @@ public class UserTest {
     @Test
     @DisplayName("verificar que apellido no sea null")
     void createUserWithoutApellidoShouldFail(){
+        Date fecha = new Date();
         DomainException exception = assertThrows(DomainException.class, () -> {
-            Date fecha = new Date();
-            new User(
+            new Usuario(
                     "agustina",
                     null,
                     "test@gmail.com",
@@ -81,9 +84,9 @@ public class UserTest {
     @Test
     @DisplayName("verificar que email no sea null")
     void createUserWithoutEmailShouldFail(){
+        Date fecha = new Date();
         DomainException exception = assertThrows(DomainException.class, () -> {
-            Date fecha = new Date();
-            new User(
+            new Usuario(
                     "agustina",
                     "Mills",
                     null,
@@ -102,9 +105,9 @@ public class UserTest {
     @Test
     @DisplayName("verificar que salario base no sea null")
     void createUserWithoutSalarioBaseShouldFail(){
+        Date fecha = new Date();
         DomainException exception = assertThrows(DomainException.class, () -> {
-            Date fecha = new Date();
-            new User(
+            new Usuario(
                     "agustin",
                     "Mills",
                     "test@emial.com",
@@ -122,12 +125,11 @@ public class UserTest {
     @Test
     @DisplayName("varios salarios inválidos deben fallar")
     void createUserWithMultipleInvalidSalaries() {
-        double[] salariosInvalidos = {0.0, -1000.0, 20000000.0}; // fuera de rango
         Date fecha = new Date();
-
+        double[] salariosInvalidos = {0.0, -1000.0, 20000000.0}; // fuera de rango
         for (double salario : salariosInvalidos) {
             DomainException exception = assertThrows(DomainException.class, () -> {
-                new User(
+                new Usuario(
                         "Agustina",
                         "Mills",
                         "test@mail.com",
@@ -153,7 +155,7 @@ public class UserTest {
         for (String email : emailsInvalidos) {
             Date fecha = new Date();
             DomainException exception = assertThrows(DomainException.class, () -> {
-                new User(
+                new Usuario(
                         "Agustina",
                         "Mills",
                         email,

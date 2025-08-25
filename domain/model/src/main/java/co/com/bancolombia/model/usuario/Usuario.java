@@ -1,4 +1,4 @@
-package co.com.bancolombia.model.user;
+package co.com.bancolombia.model.usuario;
 import co.com.bancolombia.model.exceptions.DomainException;
 import lombok.*;
 
@@ -10,8 +10,9 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder(toBuilder = true)
-public class User {
+public class Usuario {
 
+    private Integer idUsuario;
     private String nombre;
     private String apellido;
     private String email;
@@ -23,7 +24,7 @@ public class User {
     private String direccion;
 
 
-    public User(String nombre, String apellido, String email,
+    public Usuario (String nombre, String apellido, String email,
                 String documentoIdentidad, Integer idRol,String telefono, Double salarioBase,String direccion, Date fechaNacimiento) {
         if (nombre == null || nombre.isBlank())
             throw new DomainException("El nombre no puede ser nulo o vacío");
