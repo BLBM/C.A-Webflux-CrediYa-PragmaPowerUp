@@ -1,5 +1,5 @@
 package co.com.bancolombia.model.usuario;
-import co.com.bancolombia.model.exceptions.DomainException;
+import co.com.bancolombia.model.exception.DomainException;
 import lombok.*;
 
 import java.util.Date;

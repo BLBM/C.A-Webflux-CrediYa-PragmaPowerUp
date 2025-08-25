@@ -27,7 +27,7 @@ public class UserController {
             produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "Crear un nuevo usuario")
     public Mono<UserResponse> saveUser(@RequestBody UserRequest request) {
-        log.info("Iniciando usuario save");
+        log.info("Iniciando creación de usuario con email: {}", request.email());
             Usuario usuario = new Usuario(
                     request.nombre(),
                     request.apellido(),
@@ -40,6 +40,8 @@ public class UserController {
                     request.fechaNacimiento()
             );
         return guardarUsuarioUseCase.ejecutar(usuario)
+                .doOnSuccess(u -> log.info("Usuario {} creado exitosamente", u.getEmail()))
+                .doOnError(e -> log.error("Error creando usuario {}: {}", usuario.getEmail(), e.getMessage()))
                 .map(s-> new UserResponse(
                         s.getNombre(),
                         s.getApellido(),

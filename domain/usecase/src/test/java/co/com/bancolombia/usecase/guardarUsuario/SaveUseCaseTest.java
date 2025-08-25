@@ -1,6 +1,6 @@
 package co.com.bancolombia.usecase.guardarUsuario;
 
-import co.com.bancolombia.model.exceptions.DomainException;
+import co.com.bancolombia.model.exception.DomainException;
 
 import co.com.bancolombia.model.usuario.Usuario;
 import co.com.bancolombia.model.usuario.gateways.UsuarioRepository;
@@ -45,10 +45,11 @@ class SaveUseCaseTest {
         when(userRepository.existsByEmail(user.getEmail())).thenReturn(Mono.just(true));
 
         StepVerifier.create(guardarUsuarioUseCase.ejecutar(user))
-                .expectErrorMatches(throwable ->
-                        throwable instanceof DomainException &&
-                        throwable.getMessage().equals("el usuario ya se encuentra registrado")
-                ).verify();
+                .expectErrorMatches(throwable -> {
+                    System.out.println("Mensaje real: " + throwable.getMessage());
+                    return throwable instanceof DomainException &&
+                            throwable.getMessage().equals("el usuario ya se encuentra registrado");
+                }).verify();
         verify(userRepository,times(1)).existsByEmail(user.getEmail());
         verify(userRepository,never()).save(any());
     }

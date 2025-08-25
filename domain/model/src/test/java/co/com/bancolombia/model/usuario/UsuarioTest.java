@@ -1,15 +1,14 @@
 package co.com.bancolombia.model.usuario;
 
-import co.com.bancolombia.model.exceptions.DomainException;
+import co.com.bancolombia.model.exception.DomainException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@SpringBootTest
+
 class UsuarioTest {
 
     @Test
@@ -172,5 +171,93 @@ class UsuarioTest {
         }
     }
 
+    @Test
+    @DisplayName("Constructor vacío y setters funcionan")
+    void testNoArgsConstructorAndSetters() {
+        Usuario user = new Usuario(); // usa el constructor vacío
+        user.setNombre("Test");
+        user.setApellido("Apellido");
+        user.setEmail("test@mail.com");
+        user.setDocumentoIdentidad("123");
+        user.setTelefono("3000000000");
+        user.setIdRol(2);
+        user.setSalarioBase(1000.0);
+        user.setDireccion("Calle 123");
+        user.setFechaNacimiento(new Date());
+
+        assertEquals("Test", user.getNombre());
+        assertEquals("Apellido", user.getApellido());
+        assertEquals("test@mail.com", user.getEmail());
+    }
+
+    @Test
+    @DisplayName("AllArgsConstructor asigna correctamente")
+    void testAllArgsConstructor() {
+        Date fecha = new Date();
+        Usuario user = new Usuario(
+                1,
+                "Nombre",
+                "Apellido",
+                "email@test.com",
+                "123",
+                "3000000000",
+                2,
+                1200.0,
+                fecha,
+                "Dirección"
+        );
+
+        assertEquals(1, user.getIdUsuario());
+        assertEquals("Nombre", user.getNombre());
+        assertEquals("Apellido", user.getApellido());
+        assertEquals("email@test.com", user.getEmail());
+        assertEquals("123", user.getDocumentoIdentidad());
+        assertEquals("3000000000", user.getTelefono());
+        assertEquals(2, user.getIdRol());
+        assertEquals(1200.0, user.getSalarioBase());
+        assertEquals(fecha, user.getFechaNacimiento());
+        assertEquals("Dirección", user.getDireccion());
+    }
+
+
+    @Test
+    @DisplayName("nombre vacío debe fallar (isBlank)")
+    void createUserWithBlankNombreShouldFail() {
+        Date fecha = new Date();
+        DomainException exception = assertThrows(DomainException.class, () -> {
+            new Usuario(
+                    "   ", // solo espacios
+                    "Mills",
+                    "test@gmail.com",
+                    "123456",
+                    1,
+                    "3155849871",
+                    2000000.0,
+                    "av 7 plaza la bendita",
+                    fecha
+            );
+        });
+        assertTrue(exception.getMessage().contains("nombre"));
+    }
+
+    @Test
+    @DisplayName("apellido vacío debe fallar (isBlank)")
+    void createUserWithBlankApellidoShouldFail() {
+        Date fecha = new Date();
+        DomainException exception = assertThrows(DomainException.class, () -> {
+            new Usuario(
+                    "Agustina",
+                    "   ", // solo espacios
+                    "test@gmail.com",
+                    "123456",
+                    1,
+                    "3155849871",
+                    2000000.0,
+                    "av 7 plaza la bendita",
+                    fecha
+            );
+        });
+        assertTrue(exception.getMessage().contains("apellido"));
+    }
 
 }

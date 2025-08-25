@@ -32,20 +32,12 @@ public class UserReactiveRepositoryAdapter extends ReactiveAdapterOperations<
 
     @Override
     public Mono<Usuario> save(Usuario usuario) {
-        log.info("save usuario {}", usuario);
+        log.info("Iniciando save usuario con email={} y documento={}", usuario.getEmail(), usuario.getDocumentoIdentidad());
         return repository.save(toData(usuario))
                 .map(this::toEntity)
                 .as(txOperator::transactional)
-                .doOnSuccess(saved -> log.info("Usuario guardado: {}", saved))
-                .doOnError(e -> log.error("Error guardando usuario: {}", usuario));
-    }
-
-
-
-
-    @Override
-    public Mono<Usuario> update(Usuario usuario) {
-        return Mono.just(usuario);
+                .doOnSuccess(saved -> log.info("Usuario guardado correctamente con email={}", saved.getEmail()))
+                .doOnError(e -> log.error("Error guardando usuario con email={}, causa={}", usuario.getEmail(), e.getMessage(), e));
     }
 
     @Override

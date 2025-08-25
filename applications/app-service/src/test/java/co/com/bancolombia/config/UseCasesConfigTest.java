@@ -1,6 +1,11 @@
 package co.com.bancolombia.config;
 
+import co.com.bancolombia.model.rol.gateways.RolRepository;
+import co.com.bancolombia.model.usuario.gateways.UsuarioRepository;
+import co.com.bancolombia.usecase.guardarUsuario.GuardarUsuarioUseCase;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -8,6 +13,9 @@ import org.springframework.context.annotation.Import;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class UseCasesConfigTest {
+
+
+
 
     @Test
     void testUseCaseBeansExist() {
@@ -34,7 +42,24 @@ public class UseCasesConfigTest {
         public MyUseCase myUseCase() {
             return new MyUseCase();
         }
+
+        @Bean
+        public UsuarioRepository userRepository() {
+            return Mockito.mock(UsuarioRepository.class);
+        }
+
+        @Bean
+        public RolRepository rolRepository() {
+            return Mockito.mock(RolRepository.class);
+        }
+
+        @Bean
+        public GuardarUsuarioUseCase guardarUsuarioUseCase() {
+            return Mockito.mock(GuardarUsuarioUseCase.class);
+        }
+
     }
+
 
     static class MyUseCase {
         public String execute() {

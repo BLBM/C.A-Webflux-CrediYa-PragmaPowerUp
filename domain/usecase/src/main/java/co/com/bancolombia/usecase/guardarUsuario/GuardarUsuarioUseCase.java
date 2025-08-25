@@ -1,6 +1,6 @@
 package co.com.bancolombia.usecase.guardarUsuario;
 
-import co.com.bancolombia.model.exceptions.DomainException;
+import co.com.bancolombia.model.exception.DomainException;
 import co.com.bancolombia.model.usuario.Usuario;
 import co.com.bancolombia.model.usuario.gateways.UsuarioRepository;
 import lombok.RequiredArgsConstructor;
@@ -15,7 +15,7 @@ public class GuardarUsuarioUseCase {
         return userRepository.existsByEmail(user.getEmail())
                 .flatMap(created -> {
                     if (created){
-                        return  Mono.error(new DomainException("el user ya se encuentra registrado"));
+                        return  Mono.error(new DomainException("el usuario ya se encuentra registrado"));
                     }
                     return userRepository.save(user);
                 });
