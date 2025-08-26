@@ -16,7 +16,6 @@ public class CreatedUserUseCase {
     private final UserValidatorUseCase validator;
 
 
-
     public Mono<User> execute (User user){
         validator.validate(user);
         return userRepository.existsByEmail(user.getEmail())

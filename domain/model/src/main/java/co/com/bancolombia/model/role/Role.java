@@ -1,4 +1,4 @@
-package co.com.bancolombia.model.rol;
+package co.com.bancolombia.model.role;
 import lombok.Builder;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -10,7 +10,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder(toBuilder = true)
-public class Rol {
+public class Role {
 
     private String name;
     private String description;

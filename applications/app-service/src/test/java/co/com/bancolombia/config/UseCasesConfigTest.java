@@ -1,6 +1,6 @@
 package co.com.bancolombia.config;
 
-import co.com.bancolombia.model.rol.gateways.RolRepository;
+import co.com.bancolombia.model.role.gateways.RolRepository;
 import co.com.bancolombia.model.user.gateways.UserRepository;
 import co.com.bancolombia.model.user.gateways.UsuarioRepository;
 import co.com.bancolombia.usecase.create_user_case.CreatedUserUseCase;
