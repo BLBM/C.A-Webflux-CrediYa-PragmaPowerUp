@@ -16,16 +16,17 @@ public class CreatedUserUseCase {
     private final UserValidatorUseCase validator;
 
 
-
-    public Mono<User> execute (User user){
-        validator.validate(user);
-        return userRepository.existsByEmail(user.getEmail())
-                .flatMap(userExists -> {
-                    if (Boolean.TRUE.equals(userExists)) {
-                        return  Mono.error(new DomainException(EMAIL_REGISTER));
-                    }
-                    return userRepository.save(user);
-                });
+    public Mono<User> execute (User user) {
+        return Mono.defer(() -> {
+            validator.validate(user);
+            return userRepository.existsByEmail(user.getEmail())
+                    .flatMap(userExists -> {
+                        if (Boolean.TRUE.equals(userExists)) {
+                            return Mono.error(new DomainException(EMAIL_REGISTER));
+                        }
+                        return userRepository.save(user);
+                    });
+        });
     }
 
 
