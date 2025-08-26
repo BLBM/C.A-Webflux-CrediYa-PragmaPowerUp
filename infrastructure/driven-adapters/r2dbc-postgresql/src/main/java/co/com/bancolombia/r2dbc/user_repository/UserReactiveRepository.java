@@ -1,4 +1,4 @@
-package co.com.bancolombia.r2dbc.userRepository;
+package co.com.bancolombia.r2dbc.user_repository;
 
 import co.com.bancolombia.r2dbc.entity.UserEntity;
 import org.springframework.data.repository.query.ReactiveQueryByExampleExecutor;
