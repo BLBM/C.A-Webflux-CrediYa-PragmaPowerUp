@@ -3,8 +3,8 @@ package co.com.bancolombia.api.config.controller;
 import co.com.bancolombia.api.controller.UserController;
 import co.com.bancolombia.api.dto.UserRequest;
 import co.com.bancolombia.api.dto.UserResponse;
-import co.com.bancolombia.model.usuario.Usuario;
-import co.com.bancolombia.usecase.guardarUsuario.GuardarUsuarioUseCase;
+import co.com.bancolombia.model.user.Usuario;
+import co.com.bancolombia.usecase.create_user_case.GuardarUsuarioUseCase;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +24,7 @@ import static org.mockito.Mockito.when;
 
 @WebFluxTest(controllers = UserController.class)
 @ContextConfiguration(classes = {UserControllerTest.TestConfig.class})
-public class UserControllerTest {
+class UserControllerTest {
 
     @Autowired
     private WebTestClient webTestClient;

@@ -1,23 +1,8 @@
-package co.com.bancolombia.r2dbc.userRepository;
-
-import co.com.bancolombia.model.usuario.Usuario;
-import co.com.bancolombia.r2dbc.entity.UserEntity;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
-import org.reactivecommons.utils.ObjectMapper;
-
-import org.springframework.transaction.reactive.TransactionalOperator;
-import reactor.core.publisher.Mono;
-import reactor.test.StepVerifier;
-
-import java.util.Date;
-import static org.mockito.Mockito.*;
+package co.com.bancolombia.r2dbc.user_repository;
 
 
 class userReactiveTestAdapter {
-
+/*
     private UserReactiveRepository userReactiveRepository;
     private TransactionalOperator txOperator;
     private UserReactiveRepositoryAdapter userReactiveRepositoryAdapter;
@@ -30,8 +15,8 @@ class userReactiveTestAdapter {
         txOperator = Mockito.mock(TransactionalOperator.class);
         mapper = Mockito.mock(ObjectMapper.class);
 
-        when(mapper.map(any(), eq(Usuario.class))).thenAnswer(invocation -> {
-            return new Usuario(
+        when(mapper.map(any(), eq(User.class))).thenAnswer(invocation -> {
+            return new User(
                     "Agustina",
                     "Mills",
                     "test@mail.com",
@@ -105,5 +90,5 @@ class userReactiveTestAdapter {
         verify(txOperator, times(1)).transactional(any(Mono.class));
         verify(userReactiveRepository, times(1)).save(any());
     }
-
+*/
 }

@@ -1,20 +1,23 @@
 package co.com.bancolombia.api.dto;
 
+
+
+import co.com.bancolombia.api.common.SwaggerConstants;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 import java.util.Date;
 
 
 public record UserRequest(
-        String nombre,
-        String apellido,
-        String email,
-        String documentoIdentidad,
-        String telefono,
-        Double salarioBase,
-        @Schema(defaultValue = "1", description = "Rol por defecto del usuario")
-        Integer idRol,
-        String direccion,
-        Date fechaNacimiento
+         String firstName,
+         String lastName,
+         String email,
+         String documentId,
+         String phone,
+         @Schema(defaultValue = SwaggerConstants.ROLE_ID_DEFAULT)
+         Integer roleId,
+         Double baseSalary,
+         Date birthDate,
+         String address
 ) {
 }
