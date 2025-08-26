@@ -13,23 +13,23 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder(toBuilder = true)
-@Table("usuario")
+@Table("user")
 public class UserEntity {
 
     @Id
-    @Column("id_usuario")
-    private Long idUsuario;
-    private String nombre;
-    private String apellido;
+    @Column("user_id")
+    private Integer userId;
+    private String firstName;
+    private String lastName;
     private String email;
-    @Column("documento_identidad")
-    private String documentoIdentidad;
-    private String telefono;
-    @Column("id_rol")
-    private Integer idRol;
-    @Column("salario_base")
-    private Double salarioBase;
-    @Column("fecha_nacimiento")
-    private Date fechaNacimiento;
-    private String direccion;
+    @Column("document_id")
+    private String documentId;
+    private String phone;
+    @Column("role_id")
+    private Integer roleId;
+    @Column("base_salary")
+    private Double baseSalary;
+    @Column("birthday_date")
+    private Date birthdayDate;
+    private String address;
 }
