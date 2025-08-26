@@ -33,7 +33,7 @@ public class UserController {
     @Operation(summary = SwaggerConstants.SUMMARY_CREATE_USER)
     public Mono<UserResponse> saveUser(@RequestBody UserRequest request) {
 
-        log.info(LogConstants.REQUEST_RECEIVED,request.email());
+        log.info(LogConstants.REQUEST_RECEIVED,request);
 
         return createdUserUseCase.execute(UserMapper.toDomain(request))
                 .doOnSuccess(u -> log.info(LogConstants.USER_CREATED, request.email()))

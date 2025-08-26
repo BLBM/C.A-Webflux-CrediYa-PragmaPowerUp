@@ -7,13 +7,14 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 
-import java.util.Date;
+import java.time.LocalDate;
+
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder(toBuilder = true)
-@Table("user")
+@Table("users")
 public class UserEntity {
 
     @Id
@@ -29,7 +30,7 @@ public class UserEntity {
     private Integer roleId;
     @Column("base_salary")
     private Double baseSalary;
-    @Column("birthday_date")
-    private Date birthdayDate;
+    @Column("birth_date")
+    private LocalDate birthDate;
     private String address;
 }

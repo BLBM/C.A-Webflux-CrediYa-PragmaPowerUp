@@ -2,7 +2,8 @@ package co.com.bancolombia.model.user;
 
 import lombok.*;
 
-import java.util.Date;
+import java.time.LocalDate;
+
 
 @Getter
 @Setter
@@ -19,6 +20,6 @@ public class User {
     private String phone;
     private Integer roleId;
     private Double baseSalary;
-    private Date birthDate;
+    private LocalDate birthDate;
     private String address;
 }

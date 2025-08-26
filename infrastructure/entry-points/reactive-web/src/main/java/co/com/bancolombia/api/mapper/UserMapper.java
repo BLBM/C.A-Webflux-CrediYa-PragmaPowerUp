@@ -20,7 +20,7 @@ public class UserMapper {
                 request.phone(),
                 request.roleId(),
                 request.baseSalary(),
-                request.birthDate(),
+                request.birthDate() != null ? request.birthDate().toLocalDate() : null,
                 request.address()
         );
     }

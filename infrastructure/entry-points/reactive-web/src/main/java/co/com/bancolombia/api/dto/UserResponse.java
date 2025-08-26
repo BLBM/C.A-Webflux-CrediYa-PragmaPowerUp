@@ -1,6 +1,7 @@
 package co.com.bancolombia.api.dto;
 
-import java.util.Date;
+import java.time.LocalDate;
+
 
 public record UserResponse(
         String firstName,
@@ -10,7 +11,7 @@ public record UserResponse(
         String phone,
         Integer roleId,
         Double baseSalary,
-        Date birthDate,
+        LocalDate birthDate,
         String address
 ) {
 }
