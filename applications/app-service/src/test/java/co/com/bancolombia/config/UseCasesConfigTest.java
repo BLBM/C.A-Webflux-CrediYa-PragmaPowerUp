@@ -2,9 +2,8 @@ package co.com.bancolombia.config;
 
 import co.com.bancolombia.model.role.gateways.RolRepository;
 import co.com.bancolombia.model.user.gateways.UserRepository;
-import co.com.bancolombia.model.user.gateways.UsuarioRepository;
 import co.com.bancolombia.usecase.create_user_case.CreatedUserUseCase;
-import co.com.bancolombia.usecase.create_user_case.GuardarUsuarioUseCase;
+import co.com.bancolombia.usecase.user_validator.UserValidatorUseCase;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -54,6 +53,11 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
         @Bean
         public CreatedUserUseCase createdUserUseCase() {
             return Mockito.mock(CreatedUserUseCase.class);
+        }
+
+        @Bean
+        public UserValidatorUseCase userValidatorUseCase() {
+            return Mockito.mock(UserValidatorUseCase.class);
         }
 
     }

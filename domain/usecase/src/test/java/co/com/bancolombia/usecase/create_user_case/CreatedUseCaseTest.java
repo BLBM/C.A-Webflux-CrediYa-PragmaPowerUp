@@ -30,7 +30,7 @@ class CreatedUseCaseTest {
 
 
     @Test
-    void CreateUserWhenValidNotExits()
+    void createUserWhenValidNotExits()
     {
         User user = User.builder()
                 .email("jhondoe@mail.com")
@@ -49,7 +49,7 @@ class CreatedUseCaseTest {
     }
 
     @Test
-    void CreateUserWhenValidExits()
+    void createUserWhenValidExits()
     {
         User user = User.builder()
                 .email("jhondoe@mail.com")
@@ -66,6 +66,26 @@ class CreatedUseCaseTest {
         verify(userValidatorUseCase).validate(user);
         verify(userRepository).existsByEmail(user.getEmail());
         verify(userRepository,never()).save(user);
+    }
+
+    @Test
+    void createUserWhenUserNotValid() {
+        User user = User.builder()
+                .email("invalid_email")
+                .build();
+
+        doThrow(new DomainException("Validation Failed"))
+                .when(userValidatorUseCase).validate(any(User.class));
+
+        StepVerifier.create(createdUserUseCase.execute(user))
+                .expectErrorMatches(throwable ->
+                        throwable instanceof DomainException &&
+                                throwable.getMessage().equals("Validation Failed"))
+                .verify();
+
+        verify(userValidatorUseCase).validate(user);
+        verify(userRepository, never()).existsByEmail(user.getEmail());
+        verify(userRepository, never()).save(user);
     }
 
 }
