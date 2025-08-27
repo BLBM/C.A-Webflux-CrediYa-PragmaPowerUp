@@ -5,7 +5,7 @@ package co.com.bancolombia.api.dto;
 import co.com.bancolombia.api.common.SwaggerConstants;
 import io.swagger.v3.oas.annotations.media.Schema;
 
-import java.time.OffsetDateTime;
+import java.time.LocalDate;
 
 
 
@@ -18,7 +18,7 @@ public record UserRequest(
          @Schema(defaultValue = SwaggerConstants.ROLE_ID_DEFAULT)
          Integer roleId,
          Double baseSalary,
-         OffsetDateTime birthDate,
+         LocalDate birthDate,
          String address
 ) {
 }

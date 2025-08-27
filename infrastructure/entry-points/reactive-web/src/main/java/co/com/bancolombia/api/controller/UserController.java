@@ -35,9 +35,9 @@ public class UserController {
 
         log.info(LogConstants.REQUEST_RECEIVED,request);
 
-        return createdUserUseCase.execute(UserMapper.toDomain(request))
+        return createdUserUseCase.execute(UserMapper.INSTANCE.toDomain(request))
                 .doOnSuccess(u -> log.info(LogConstants.USER_CREATED, request.email()))
                 .doOnError(e -> log.error(LogConstants.ERROR_PROCESS,request.email()))
-                .map(UserMapper::toResponse);
+                .map(UserMapper.INSTANCE::toResponse);
     }
 }
