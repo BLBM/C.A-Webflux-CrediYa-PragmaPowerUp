@@ -3,7 +3,7 @@ package co.com.bancolombia.model.user;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -13,7 +13,7 @@ class UserTest {
     @Test
     @DisplayName("createUser")
     void createValidUser(){
-        Date fecha = new Date();
+        LocalDate fecha = LocalDate.now();
         User user = User.builder()
                 .firstName("Agustina")
                 .lastName("Mills")
@@ -34,7 +34,7 @@ class UserTest {
         assertEquals(1,user.getRoleId());
         assertEquals(2000000.0,user.getBaseSalary(),0);
         assertEquals("av 7 plaza la bendita",user.getAddress());
-        assertEquals(fecha.toInstant(),user.getBirthDate().toInstant());
+        assertEquals(fecha,user.getBirthDate());
     }
 
 

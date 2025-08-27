@@ -48,7 +48,6 @@ class RoleTest {
                 .build();
 
         Role clone = original.toBuilder().build();
-
         assertNotSame(original, clone);
         assertEquals(original.getName(), clone.getName());
         assertEquals(original.getDescription(), clone.getDescription());
