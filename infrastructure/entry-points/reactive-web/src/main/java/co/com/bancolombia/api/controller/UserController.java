@@ -6,7 +6,7 @@ import co.com.bancolombia.api.common.SwaggerConstants;
 import co.com.bancolombia.api.dto.UserRequest;
 import co.com.bancolombia.api.dto.UserResponse;
 import co.com.bancolombia.api.mapper.UserMapper;
-import co.com.bancolombia.model.common.LogConstants;
+import co.com.bancolombia.logconstants.LogConstants;
 import co.com.bancolombia.usecase.create_user_case.CreatedUserUseCase;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -20,7 +20,7 @@ import reactor.core.publisher.Mono;
 
 @Slf4j
 @RestController
-@RequestMapping(RequestMappingConstants.URL_USUARIOS)
+@RequestMapping(RequestMappingConstants.URL_USERS)
 @RequiredArgsConstructor
 @Tag(name = SwaggerConstants.CREATE_USER, description = SwaggerConstants.DESCRIPTION_CREATE_USER)
 public class UserController {

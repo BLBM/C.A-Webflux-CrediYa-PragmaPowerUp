@@ -2,6 +2,7 @@ package co.com.bancolombia.r2dbc.user_repository;
 
 
 
+import co.com.bancolombia.logconstants.LogConstants;
 import co.com.bancolombia.model.user.User;
 import co.com.bancolombia.model.user.gateways.UserRepository;
 import co.com.bancolombia.r2dbc.entity.UserEntity;
@@ -32,12 +33,12 @@ public class UserReactiveRepositoryAdapter extends ReactiveAdapterOperations<
 
     @Override
     public Mono<User> save(User user) {
-        log.info("Iniciando save usuario con email={} y documento={}", user.getEmail(), user.getDocumentId());
+        log.info(LogConstants.START_PROCESS, user);
         return repository.save(toData(user))
                 .map(this::toEntity)
                 .as(txOperator::transactional)
-                .doOnSuccess(saved -> log.info("Usuario guardado correctamente con email={}", saved.getEmail()))
-                .doOnError(e -> log.error("Error guardando usuario con email={}, causa={}", user.getEmail(), e.getMessage(), e));
+                .doOnSuccess(saved -> log.info(LogConstants.SUCCESSFUL_OPERATION, saved))
+                .doOnError(e -> log.error(LogConstants.ERROR_OPERATION, e.getMessage()));
     }
 
     @Override

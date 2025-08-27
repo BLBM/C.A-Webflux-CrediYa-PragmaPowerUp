@@ -1,5 +1,5 @@
 package co.com.bancolombia.api.common;
 
 public interface RequestMappingConstants {
-    String URL_USUARIOS = "/api/v1/usuarios";
+    String URL_USERS = "/api/v1/users";
 }
