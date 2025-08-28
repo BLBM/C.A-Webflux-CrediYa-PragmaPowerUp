@@ -24,6 +24,10 @@ springdoc:
     operationsSorter: method
     tagsSorter: alpha
 
+security:
+  secretKey: 0c14c96f918666c6ae4c8da396705d20d01d2b892c0e386375332edb38c95d54
+  userGenerator: AUTH_USER
+
 management:
   endpoints:
     web:

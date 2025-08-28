@@ -22,7 +22,6 @@ class UserValidatorUseCaseTest {
     void setUp() {
         userValidatorUseCase = new UserValidatorUseCase();
 
-        // Base user válido para reutilizar en todos los tests
         validUser = User.builder()
                 .firstName("John")
                 .lastName("Doe")
@@ -170,12 +169,12 @@ class UserValidatorUseCaseTest {
     @Test
     void shouldValidateFirstErrorEncounteredFirstNameHasPriority() {
         User userWithMultipleErrors = validUser.toBuilder()
-                .firstName(null)        // First error
-                .lastName(null)         // Second error
-                .email("invalid_email") // Third error
-                .documentId(null)       // Fourth error
-                .phone(null)           // Fifth error
-                .baseSalary(null)      // Sixth error
+                .firstName(null)
+                .lastName(null)
+                .email("invalid_email")
+                .documentId(null)
+                .phone(null)
+                .baseSalary(null)
                 .build();
 
         DomainException exception = assertThrows(DomainException.class,
@@ -186,11 +185,11 @@ class UserValidatorUseCaseTest {
     @Test
     void shouldValidateInOrderAndReturnLastNameErrorWhenFirstNameIsValid() {
         User userWithLastNameError = validUser.toBuilder()
-                .lastName(null)           // First error encountered
-                .email("invalid_email")   // Second error
-                .documentId(null)         // Third error
-                .phone(null)             // Fourth error
-                .baseSalary(null)        // Fifth error
+                .lastName(null)
+                .email("invalid_email")
+                .documentId(null)
+                .phone(null)
+                .baseSalary(null)
                 .build();
 
         DomainException exception = assertThrows(DomainException.class,
