@@ -40,4 +40,6 @@ public class UserController {
                 .doOnError(e -> log.error(LogConstants.ERROR_PROCESS,request.email()))
                 .map(UserMapper.INSTANCE::toResponse);
     }
+
+
 }

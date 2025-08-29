@@ -14,5 +14,5 @@ public interface UserLoginMapper{
     UserLoginMapper INSTANCE = Mappers.getMapper(UserLoginMapper.class);
 
     @Mapping(target = "userLoginId", ignore = true )
-    UserLoginRequest toDomain(UserLogin userLogin);
+    UserLogin toDomain(UserLoginRequest userLoginRequest);
 }
