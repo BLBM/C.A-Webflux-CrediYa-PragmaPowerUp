@@ -5,6 +5,7 @@ public interface LogConstants {
     //PROCESS
     String START_PROCESS = "Starting process: {}";
     String END_PROCESS = "Ending process: {}";
+    String START_JJWT_PROCESS = "Starting JJWT  process";
 
 
     //CONTROLLERS

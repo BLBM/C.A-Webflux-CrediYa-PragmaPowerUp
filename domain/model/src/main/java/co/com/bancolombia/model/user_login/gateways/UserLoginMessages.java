@@ -8,8 +8,7 @@ import lombok.Getter;
 @Getter
 public enum UserLoginMessages {
     EMAIL_NO_EXISTS("User not found"),
-    CREDENTIALS_INVALID("Invalid credentials"),
-    ROLE_INVALID("Invalid role");
+    CREDENTIALS_INVALID("Invalid credentials");
 
     private final String message;
 

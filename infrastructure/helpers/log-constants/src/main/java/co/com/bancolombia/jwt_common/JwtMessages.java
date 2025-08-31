@@ -9,5 +9,6 @@ public interface JwtMessages{
     String ILLEGAL_ARGS = "illegal arguments";
     String INVALID_ROL = "Invalid role in token";
     String ROL_NO_FOUNDS = "No roles found in token";
+    String COMPLETE_ERROR_MESSAGES ="{ \"timestamp\": \"%s\", \"status\": %d, \"error\": \"%s\", \"message\": \"%s\" }";
 
 }

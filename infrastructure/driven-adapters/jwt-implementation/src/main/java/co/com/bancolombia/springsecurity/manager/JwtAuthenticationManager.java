@@ -1,6 +1,8 @@
 package co.com.bancolombia.springsecurity.manager;
 
+import co.com.bancolombia.logconstants.LogConstants;
 import co.com.bancolombia.springsecurity.provider.JwtProvider;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.ReactiveAuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -11,6 +13,7 @@ import reactor.core.publisher.Mono;
 import java.util.List;
 import java.util.Map;
 
+@Slf4j
 @Component
 public class JwtAuthenticationManager implements ReactiveAuthenticationManager {
 
@@ -21,6 +24,7 @@ public class JwtAuthenticationManager implements ReactiveAuthenticationManager {
 
     @Override
     public Mono<Authentication> authenticate (Authentication authentication) {
+        log.info(LogConstants.START_JJWT_PROCESS);
         return Mono.just(authentication)
                 .map(auth -> jwtProvider.getClaims((auth.getCredentials().toString())))
                 .log()

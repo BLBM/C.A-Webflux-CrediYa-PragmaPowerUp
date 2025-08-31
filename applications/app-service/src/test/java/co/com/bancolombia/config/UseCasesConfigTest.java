@@ -1,8 +1,11 @@
 package co.com.bancolombia.config;
 
-import co.com.bancolombia.model.role.gateways.RoleRepository;
+
 import co.com.bancolombia.model.user.gateways.UserRepository;
+import co.com.bancolombia.model.user_login.gateways.UserLoginRepository;
+import co.com.bancolombia.usecase.auth_use_case.AuthUseCase;
 import co.com.bancolombia.usecase.create_user_case.CreatedUserUseCase;
+import co.com.bancolombia.usecase.signup_use_case.SignUpUseCase;
 import co.com.bancolombia.usecase.user_validator.UserValidatorUseCase;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -46,9 +49,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
         }
 
         @Bean
-        public RoleRepository rolRepository() {
-            return Mockito.mock(RoleRepository.class);
-        }
+        public UserLoginRepository userLoginRepository() {return Mockito.mock(UserLoginRepository.class);}
 
         @Bean
         public CreatedUserUseCase createdUserUseCase() {
@@ -59,6 +60,12 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
         public UserValidatorUseCase userValidatorUseCase() {
             return Mockito.mock(UserValidatorUseCase.class);
         }
+
+        @Bean
+        public AuthUseCase authUseCase() {return Mockito.mock(AuthUseCase.class);}
+
+        @Bean
+        public SignUpUseCase signUpUseCase() {return Mockito.mock(SignUpUseCase.class);}
 
     }
 

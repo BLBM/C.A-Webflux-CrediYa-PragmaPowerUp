@@ -4,6 +4,7 @@ package co.com.bancolombia.springsecurity.provider;
 
 
 import co.com.bancolombia.jwt_common.JwtMessages;
+import co.com.bancolombia.logconstants.LogConstants;
 import co.com.bancolombia.model.role.Role;
 import co.com.bancolombia.springsecurity.dto.CustomUserLogin;
 import io.jsonwebtoken.*;
@@ -33,6 +34,7 @@ public class JwtProvider {
     private Integer expiration;
 
     public String generateToken(CustomUserLogin userLogin) {
+        log.info(LogConstants.START_JJWT_PROCESS);
         List<String> roles = userLogin.getAuthorities()
                 .stream()
                 .map(GrantedAuthority::getAuthority)

@@ -1,8 +1,7 @@
 apply plugin: 'org.springframework.boot'
 
 dependencies {
-	implementation project(':spring-security')
-	implementation project(':security')
+	implementation project(':jwt-implementation')
 	implementation project(':log-constants')
 	implementation project(':reactive-web')
 	implementation 'org.reactivecommons.utils:object-mapper:0.1.0'
