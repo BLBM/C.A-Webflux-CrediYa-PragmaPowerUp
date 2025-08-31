@@ -1,4 +1,4 @@
-package co.com.bancolombia.api.dto;
+package co.com.bancolombia.api.dto.login_dto;
 
 public record UserLoginResponse(
         String Token
