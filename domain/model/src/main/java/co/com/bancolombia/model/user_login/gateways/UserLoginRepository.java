@@ -6,4 +6,6 @@ import reactor.core.publisher.Mono;
 public interface UserLoginRepository {
 
     Mono<UserLogin> findByEmail(String email);
+    Mono<UserLogin> register(UserLogin userLogin);
+    Mono<Boolean> existsByEmail(String email);
 }

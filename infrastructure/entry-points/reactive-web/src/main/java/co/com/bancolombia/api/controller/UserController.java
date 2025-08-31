@@ -3,8 +3,8 @@ package co.com.bancolombia.api.controller;
 
 import co.com.bancolombia.api.common.RequestMappingConstants;
 import co.com.bancolombia.api.common.SwaggerConstants;
-import co.com.bancolombia.api.dto.UserRequest;
-import co.com.bancolombia.api.dto.UserResponse;
+import co.com.bancolombia.api.dto.user_dto.UserRequest;
+import co.com.bancolombia.api.dto.user_dto.UserResponse;
 import co.com.bancolombia.api.mapper.UserMapper;
 import co.com.bancolombia.logconstants.LogConstants;
 import co.com.bancolombia.usecase.create_user_case.CreatedUserUseCase;
@@ -13,6 +13,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
 
@@ -31,6 +32,7 @@ public class UserController {
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = SwaggerConstants.SUMMARY_CREATE_USER)
+    @PreAuthorize("hasAnyRole('ADMIN','ADVISER')")
     public Mono<UserResponse> saveUser(@RequestBody UserRequest request) {
 
         log.info(LogConstants.REQUEST_RECEIVED,request);

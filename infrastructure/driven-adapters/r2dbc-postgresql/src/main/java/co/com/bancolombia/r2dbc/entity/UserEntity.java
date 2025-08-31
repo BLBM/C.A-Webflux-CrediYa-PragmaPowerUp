@@ -27,7 +27,7 @@ public class UserEntity {
     private String documentId;
     private String phone;
     @Column("role_id")
-    private Integer roleId;
+    private String role;
     @Column("base_salary")
     private Double baseSalary;
     @Column("birth_date")

@@ -1,16 +1,33 @@
 package co.com.bancolombia.r2dbc.entity;
 
-import co.com.bancolombia.model.role.Role;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
 
-@Entity
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Column;
+import org.springframework.data.relational.core.mapping.Table;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder(toBuilder = true)
+@Table("user_login")
 public class UserLoginEntity {
 
 
-    @Column(name = "user_login_id")
-    private int userLoginId;
+    @Id
+    @Column("user_login_id")
+    private Integer id;
+
+    @Column("email")
     private String email;
+
+    @Column("password")
     private String password;
-    private Role role;
+
+    @Column("role")
+    private String role;
 }

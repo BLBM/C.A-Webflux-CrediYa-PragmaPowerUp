@@ -1,7 +1,7 @@
 package co.com.bancolombia.api.mapper;
 
-import co.com.bancolombia.api.dto.UserRequest;
-import co.com.bancolombia.api.dto.UserResponse;
+import co.com.bancolombia.api.dto.user_dto.UserRequest;
+import co.com.bancolombia.api.dto.user_dto.UserResponse;
 import co.com.bancolombia.model.user.User;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

@@ -1,5 +1,6 @@
 dependencies {
     implementation project(':model')
+    implementation project(':log-constants')
     implementation 'org.springframework:spring-context'
     implementation "io.jsonwebtoken:jjwt-api:${jjwtVersion}"
     runtimeOnly "io.jsonwebtoken:jjwt-impl:${jjwtVersion}"

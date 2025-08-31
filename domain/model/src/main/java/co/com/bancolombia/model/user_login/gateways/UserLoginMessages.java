@@ -1,18 +1,19 @@
 package co.com.bancolombia.model.user_login.gateways;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
+
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+
 
 @Getter
-@RequiredArgsConstructor
-@AllArgsConstructor
 public enum UserLoginMessages {
     EMAIL_NO_EXISTS("User not found"),
-    CREDENTIALS_INVALID("Invalid credentials");
+    CREDENTIALS_INVALID("Invalid credentials"),
+    ROLE_INVALID("Invalid role");
 
     private final String message;
 
+    UserLoginMessages(String message) {
+        this.message = message;
+    }
 }

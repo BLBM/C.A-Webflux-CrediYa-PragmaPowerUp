@@ -11,7 +11,7 @@ import lombok.*;
 @Builder(toBuilder = true)
 public class UserLogin {
 
-    private int id;
+    private int userLoginId;
     private String email;
     private String password;
     private Role role;

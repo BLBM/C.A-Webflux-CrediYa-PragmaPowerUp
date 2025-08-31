@@ -1,6 +1,6 @@
 package co.com.bancolombia.config;
 
-import co.com.bancolombia.model.role.gateways.RolRepository;
+import co.com.bancolombia.model.role.gateways.RoleRepository;
 import co.com.bancolombia.model.user.gateways.UserRepository;
 import co.com.bancolombia.usecase.create_user_case.CreatedUserUseCase;
 import co.com.bancolombia.usecase.user_validator.UserValidatorUseCase;
@@ -46,8 +46,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
         }
 
         @Bean
-        public RolRepository rolRepository() {
-            return Mockito.mock(RolRepository.class);
+        public RoleRepository rolRepository() {
+            return Mockito.mock(RoleRepository.class);
         }
 
         @Bean
