@@ -10,5 +10,5 @@ public interface JwtMessages{
     String INVALID_ROL = "Invalid role in token";
     String ROL_NO_FOUNDS = "No roles found in token";
     String COMPLETE_ERROR_MESSAGES ="{ \"timestamp\": \"%s\", \"status\": %d, \"error\": \"%s\", \"message\": \"%s\" }";
-
+    String JJWT_ERROR_PROCESS = "Error occurred in process {}";
 }

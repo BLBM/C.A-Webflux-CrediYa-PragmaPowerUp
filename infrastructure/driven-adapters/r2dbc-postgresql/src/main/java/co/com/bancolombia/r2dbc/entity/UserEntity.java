@@ -22,11 +22,12 @@ public class UserEntity {
     private Integer userId;
     private String firstName;
     private String lastName;
+    @Column("email")
     private String email;
     @Column("document_id")
     private String documentId;
     private String phone;
-    @Column("role_id")
+    @Column("role")
     private String role;
     @Column("base_salary")
     private Double baseSalary;

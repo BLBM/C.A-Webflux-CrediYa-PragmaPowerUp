@@ -1,9 +1,9 @@
-package co.com.bancolombia.springsecurity.filter;
+package co.com.bancolombia.jwt_implement.filter;
 
 import co.com.bancolombia.jwt_common.JwtMessages;
 import co.com.bancolombia.logconstants.LogConstants;
-import co.com.bancolombia.springsecurity.exception.JwtException;
-import co.com.bancolombia.springsecurity.provider.JwtProvider;
+import co.com.bancolombia.jwt_implement.exception.JwtException;
+import co.com.bancolombia.jwt_implement.provider.JwtProvider;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.http.HttpHeaders;
@@ -46,7 +46,8 @@ public class JwtFilter implements WebFilter {
 
 
         if (auth == null) {
-            return chain.filter(exchange);
+            log.warn(JwtMessages.JJWT_ERROR_PROCESS, JwtMessages.TOKEN_NO_FOUNDS);
+            return this.writeError(exchange, HttpStatus.UNAUTHORIZED, JwtMessages.TOKEN_NO_FOUNDS);
         }
 
         if (!auth.startsWith("Bearer ")) {

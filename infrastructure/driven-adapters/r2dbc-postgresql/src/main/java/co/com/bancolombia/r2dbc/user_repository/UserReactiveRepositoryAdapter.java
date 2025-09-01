@@ -19,7 +19,7 @@ import reactor.core.publisher.Mono;
 public class UserReactiveRepositoryAdapter extends ReactiveAdapterOperations<
         User,
         UserEntity,
-        String,
+        Integer,
         UserReactiveRepository
 > implements UserRepository {
 
@@ -30,6 +30,13 @@ public class UserReactiveRepositoryAdapter extends ReactiveAdapterOperations<
         this.txOperator = txOperator;
     }
 
+
+    @Override
+    public Mono<User> findByEmail(String email) {
+        log.info("Finding by email {}", email);
+        return repository.findByEmail(email)
+                .map(entity -> mapper.map(entity, User.class));
+    }
 
     @Override
     public Mono<User> save(User user) {

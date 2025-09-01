@@ -1,4 +1,4 @@
-package co.com.bancolombia.springsecurity.provider;
+package co.com.bancolombia.jwt_implement.provider;
 
 
 
@@ -6,7 +6,7 @@ package co.com.bancolombia.springsecurity.provider;
 import co.com.bancolombia.jwt_common.JwtMessages;
 import co.com.bancolombia.logconstants.LogConstants;
 import co.com.bancolombia.model.role.Role;
-import co.com.bancolombia.springsecurity.dto.CustomUserLogin;
+import co.com.bancolombia.jwt_implement.dto.CustomUserLogin;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;

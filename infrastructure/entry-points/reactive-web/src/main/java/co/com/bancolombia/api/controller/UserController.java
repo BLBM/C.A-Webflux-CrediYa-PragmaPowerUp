@@ -3,11 +3,14 @@ package co.com.bancolombia.api.controller;
 
 import co.com.bancolombia.api.common.RequestMappingConstants;
 import co.com.bancolombia.api.common.SwaggerConstants;
+import co.com.bancolombia.api.dto.findby_email_dto.FindByEmailResponse;
 import co.com.bancolombia.api.dto.user_dto.UserRequest;
 import co.com.bancolombia.api.dto.user_dto.UserResponse;
+import co.com.bancolombia.api.mapper.FindByEmailMapper;
 import co.com.bancolombia.api.mapper.UserMapper;
 import co.com.bancolombia.logconstants.LogConstants;
 import co.com.bancolombia.usecase.create_user_case.CreatedUserUseCase;
+import co.com.bancolombia.usecase.find_user_by_email.FindUserByEmailUseCase;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -21,15 +24,16 @@ import reactor.core.publisher.Mono;
 
 @Slf4j
 @RestController
-@RequestMapping(RequestMappingConstants.URL_USERS)
+@RequestMapping(RequestMappingConstants.GLOBAL_URL)
 @RequiredArgsConstructor
 @Tag(name = SwaggerConstants.CREATE_USER, description = SwaggerConstants.DESCRIPTION_CREATE_USER)
 public class UserController {
 
     private final CreatedUserUseCase createdUserUseCase;
+    private final FindUserByEmailUseCase findUserByEmailUseCase;
 
 
-    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE,
+    @PostMapping(path = RequestMappingConstants.URL_USERS,consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = SwaggerConstants.SUMMARY_CREATE_USER)
     @PreAuthorize("hasAnyRole('ADMIN','ADVISER')")
@@ -41,6 +45,18 @@ public class UserController {
                 .doOnSuccess(u -> log.info(LogConstants.USER_CREATED, request.email()))
                 .doOnError(e -> log.error(LogConstants.ERROR_PROCESS,request.email()))
                 .map(UserMapper.INSTANCE::toResponse);
+    }
+
+    @GetMapping(path = RequestMappingConstants.URL_FIND_USER, produces = MediaType.APPLICATION_JSON_VALUE)
+    public Mono<FindByEmailResponse>findByEmail(@RequestParam("email") String email) {
+
+        log.info(LogConstants.REQUEST_RECEIVED,email);
+
+        return findUserByEmailUseCase.execute(email)
+                .doOnSuccess(u -> log.info(LogConstants.FIND_BY_EMAIL_REQUEST,email))
+                .doOnError(e->log.error(LogConstants.ERROR_FIND_BY_EMAIL_REQUEST,email))
+                .map(FindByEmailMapper.INSTANCE::toDto);
+
     }
 
 

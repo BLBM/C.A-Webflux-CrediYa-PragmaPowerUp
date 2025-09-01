@@ -1,7 +1,7 @@
-package co.com.bancolombia.springsecurity.manager;
+package co.com.bancolombia.jwt_implement.manager;
 
 import co.com.bancolombia.logconstants.LogConstants;
-import co.com.bancolombia.springsecurity.provider.JwtProvider;
+import co.com.bancolombia.jwt_implement.provider.JwtProvider;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.ReactiveAuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

@@ -1,7 +1,7 @@
 package co.com.bancolombia.config;
 
-import co.com.bancolombia.springsecurity.filter.JwtFilter;
-import co.com.bancolombia.springsecurity.security_context_repository.SecurityContextRepository;
+import co.com.bancolombia.jwt_implement.filter.JwtFilter;
+import co.com.bancolombia.jwt_implement.security_context_repository.SecurityContextRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;

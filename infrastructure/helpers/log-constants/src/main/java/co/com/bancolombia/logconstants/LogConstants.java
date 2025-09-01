@@ -17,6 +17,8 @@ public interface LogConstants {
     String ERROR_AUTHENTICATED = "Error occurred in authenticated: {}";
     String REQUEST_AUTHENTICATED = "Request authenticated: {}";
     String SIGNUP_REQUEST_RECEIVED= "Signup received: {}";
+    String FIND_BY_EMAIL_REQUEST = "Request Find by email: {}";
+    String ERROR_FIND_BY_EMAIL_REQUEST = "Error find by email: {}";
 
 
 
