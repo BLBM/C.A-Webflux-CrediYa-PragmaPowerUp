@@ -1,5 +1,6 @@
 package co.com.bancolombia.model.user;
 
+import co.com.bancolombia.model.role.Role;
 import lombok.*;
 
 import java.time.LocalDate;
@@ -18,7 +19,7 @@ public class User {
     private String email;
     private String documentId;
     private String phone;
-    private Integer roleId;
+    private Role role;
     private Double baseSalary;
     private LocalDate birthDate;
     private String address;

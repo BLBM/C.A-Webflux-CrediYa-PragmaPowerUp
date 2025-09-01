@@ -1,5 +1,6 @@
 package co.com.bancolombia.model.user;
 
+import co.com.bancolombia.model.role.Role;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -20,7 +21,7 @@ class UserTest {
                 .email("test@mail.com")
                 .documentId("123")
                 .phone("3155849871")
-                .roleId(1)
+                .role(Role.USER)
                 .baseSalary(2000000.0)
                 .birthDate(fecha)
                 .address("av 7 plaza la bendita")
@@ -31,7 +32,7 @@ class UserTest {
         assertEquals("test@mail.com",user.getEmail());
         assertEquals("123",user.getDocumentId());
         assertEquals("3155849871",user.getPhone());
-        assertEquals(1,user.getRoleId());
+        assertEquals(Role.USER,user.getRole());
         assertEquals(2000000.0,user.getBaseSalary(),0);
         assertEquals("av 7 plaza la bendita",user.getAddress());
         assertEquals(fecha,user.getBirthDate());

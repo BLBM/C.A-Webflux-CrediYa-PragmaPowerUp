@@ -12,5 +12,5 @@ public interface SwaggerConstants {
     String SUMMARY_CREATE_USER = "Create a new user";
 
     // SCHEMAS
-    String ROLE_ID_DEFAULT = "1";
+    String ROLE_DEFAULT = "USER";
 }

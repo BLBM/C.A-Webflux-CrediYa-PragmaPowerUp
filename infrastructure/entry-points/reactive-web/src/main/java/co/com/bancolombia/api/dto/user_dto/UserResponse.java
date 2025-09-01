@@ -9,7 +9,7 @@ public record UserResponse(
         String email,
         String documentId,
         String phone,
-        Integer roleId,
+        String role,
         Double baseSalary,
         LocalDate birthDate,
         String address

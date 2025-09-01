@@ -15,8 +15,8 @@ public record UserRequest(
          String email,
          String documentId,
          String phone,
-         @Schema(defaultValue = SwaggerConstants.ROLE_ID_DEFAULT)
-         Integer roleId,
+         @Schema(defaultValue = SwaggerConstants.ROLE_DEFAULT)
+         String role,
          Double baseSalary,
          LocalDate birthDate,
          String address
