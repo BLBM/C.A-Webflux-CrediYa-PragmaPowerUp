@@ -10,7 +10,6 @@ import co.com.bancolombia.api.mapper.FindByEmailMapper;
 import co.com.bancolombia.api.mapper.UserMapper;
 import co.com.bancolombia.logconstants.LogConstants;
 import co.com.bancolombia.usecase.create_user_case.CreatedUserUseCase;
-import co.com.bancolombia.usecase.find_user_by_email.FindUserByEmailUseCase;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -30,7 +29,6 @@ import reactor.core.publisher.Mono;
 public class UserController {
 
     private final CreatedUserUseCase createdUserUseCase;
-    private final FindUserByEmailUseCase findUserByEmailUseCase;
 
 
     @PostMapping(path = RequestMappingConstants.URL_USERS,consumes = MediaType.APPLICATION_JSON_VALUE,
@@ -52,7 +50,7 @@ public class UserController {
 
         log.info(LogConstants.REQUEST_RECEIVED,email);
 
-        return findUserByEmailUseCase.execute(email)
+        return createdUserUseCase.findByEmail(email)
                 .doOnSuccess(u -> log.info(LogConstants.FIND_BY_EMAIL_REQUEST,email))
                 .doOnError(e->log.error(LogConstants.ERROR_FIND_BY_EMAIL_REQUEST,email))
                 .map(FindByEmailMapper.INSTANCE::toDto);

@@ -5,7 +5,7 @@ import co.com.bancolombia.model.exception.DomainException;
 import co.com.bancolombia.model.user.User;
 import co.com.bancolombia.model.user.gateways.UserMessages;
 import co.com.bancolombia.model.user.gateways.UserRepository;
-import co.com.bancolombia.usecase.user_validator.UserValidatorUseCase;
+import co.com.bancolombia.usecase.util.UserValidatorUseCase;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -88,4 +88,35 @@ class CreatedUseCaseTest {
         verify(userRepository, never()).save(user);
     }
 
+
+    @Test
+    void executeUserFound() {
+        User user = User.builder()
+                .firstName("John")
+                .lastName("Doe")
+                .email("test@mail.com")
+                .documentId("12345678")
+                .phone("3001234567")
+                .baseSalary(2500000.0)
+                .build();
+
+        when(userRepository.findByEmail("test@mail.com")).thenReturn(Mono.just(user));
+
+        StepVerifier.create(createdUserUseCase.findByEmail("test@mail.com"))
+                .expectNext(user)
+                .verifyComplete();
+
+        verify(userRepository).findByEmail("test@mail.com");
+    }
+
+    @Test
+    void executeUserNotFound() {
+        when(userRepository.findByEmail("notfound@mail.com")).thenReturn(Mono.empty());
+
+        StepVerifier.create(createdUserUseCase.findByEmail("notfound@mail.com"))
+                .expectNextCount(0)
+                .verifyComplete();
+
+        verify(userRepository).findByEmail("notfound@mail.com");
+    }
 }

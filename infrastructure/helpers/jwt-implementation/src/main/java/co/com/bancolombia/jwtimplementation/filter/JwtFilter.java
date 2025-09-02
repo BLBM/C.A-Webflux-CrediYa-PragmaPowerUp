@@ -1,9 +1,9 @@
-package co.com.bancolombia.jwt_implement.filter;
+package co.com.bancolombia.jwtimplementation.filter;
 
 import co.com.bancolombia.jwt_common.JwtMessages;
 import co.com.bancolombia.logconstants.LogConstants;
-import co.com.bancolombia.jwt_implement.exception.JwtException;
-import co.com.bancolombia.jwt_implement.provider.JwtProvider;
+import co.com.bancolombia.jwtimplementation.exception.JwtException;
+import co.com.bancolombia.jwtimplementation.provider.JwtProvider;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.http.HttpHeaders;

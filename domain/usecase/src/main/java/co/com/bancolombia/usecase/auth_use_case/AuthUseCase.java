@@ -1,6 +1,7 @@
 package co.com.bancolombia.usecase.auth_use_case;
 
 import co.com.bancolombia.model.exception.AuthException;
+import co.com.bancolombia.model.exception.DomainException;
 import co.com.bancolombia.model.user_login.UserLogin;
 import co.com.bancolombia.model.user_login.gateways.PasswordEncoderService;
 import co.com.bancolombia.model.user_login.gateways.UserLoginMessages;
@@ -24,6 +25,16 @@ public class AuthUseCase {
                         return Mono.just(uLog);
                     });
 
+    }
+
+    public Mono<UserLogin> signUp(UserLogin userLogin) {
+        return userLoginRepository.existsByEmail(userLogin.getEmail())
+                .flatMap(userExists -> {
+                    if (Boolean.TRUE.equals(userExists)) {
+                        return Mono.error(new DomainException("EMAIL_REGISTER"));
+                    }
+                    return userLoginRepository.register(userLogin);
+                });
     }
 
 }

@@ -6,7 +6,7 @@ import co.com.bancolombia.model.user_login.gateways.UserLoginRepository;
 import co.com.bancolombia.usecase.auth_use_case.AuthUseCase;
 import co.com.bancolombia.usecase.create_user_case.CreatedUserUseCase;
 import co.com.bancolombia.usecase.signup_use_case.SignUpUseCase;
-import co.com.bancolombia.usecase.user_validator.UserValidatorUseCase;
+import co.com.bancolombia.usecase.util.UserValidatorUseCase;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;

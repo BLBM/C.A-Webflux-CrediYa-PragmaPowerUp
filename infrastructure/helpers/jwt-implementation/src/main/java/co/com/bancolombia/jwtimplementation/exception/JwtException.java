@@ -1,4 +1,4 @@
-package co.com.bancolombia.jwt_implement.exception;
+package co.com.bancolombia.jwtimplementation.exception;
 
 public class JwtException extends RuntimeException {
     public JwtException(String message) {

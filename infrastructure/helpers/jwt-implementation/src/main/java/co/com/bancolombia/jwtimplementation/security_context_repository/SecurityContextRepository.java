@@ -1,6 +1,6 @@
-package co.com.bancolombia.jwt_implement.security_context_repository;
+package co.com.bancolombia.jwtimplementation.security_context_repository;
 
-import co.com.bancolombia.jwt_implement.manager.JwtAuthenticationManager;
+import co.com.bancolombia.jwtimplementation.manager.JwtAuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextImpl;

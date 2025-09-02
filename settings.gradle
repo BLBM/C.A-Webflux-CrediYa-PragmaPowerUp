@@ -27,4 +27,4 @@ project(':reactive-web').projectDir = file('./infrastructure/entry-points/reacti
 include ':log-constants'
 project(':log-constants').projectDir = file('./infrastructure/helpers/log-constants')
 include ':jwt-implementation'
-project(':jwt-implementation').projectDir = file('./infrastructure/driven-adapters/jwt-implementation')
+project(':jwt-implementation').projectDir = file('./infrastructure/helpers/jwt-implementation')

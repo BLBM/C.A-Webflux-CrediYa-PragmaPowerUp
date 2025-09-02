@@ -1,4 +1,4 @@
-package co.com.bancolombia.usecase.user_validator;
+package co.com.bancolombia.usecase.util;
 
 import co.com.bancolombia.model.exception.DomainException;
 import co.com.bancolombia.model.user.User;

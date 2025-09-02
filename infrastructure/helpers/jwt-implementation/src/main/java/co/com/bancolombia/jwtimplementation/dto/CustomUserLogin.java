@@ -1,4 +1,4 @@
-package co.com.bancolombia.jwt_implement.dto;
+package co.com.bancolombia.jwtimplementation.dto;
 
 import co.com.bancolombia.model.user_login.UserLogin;
 import lombok.Getter;
