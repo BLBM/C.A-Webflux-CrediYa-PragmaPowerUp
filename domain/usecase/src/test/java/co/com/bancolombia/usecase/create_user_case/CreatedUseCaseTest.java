@@ -5,7 +5,7 @@ import co.com.bancolombia.model.exception.DomainException;
 import co.com.bancolombia.model.user.User;
 import co.com.bancolombia.model.user.gateways.UserMessages;
 import co.com.bancolombia.model.user.gateways.UserRepository;
-import co.com.bancolombia.usecase.util.UserValidatorUseCase;
+import co.com.bancolombia.usecase.valid_utils.UserValidatorUseCase;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;

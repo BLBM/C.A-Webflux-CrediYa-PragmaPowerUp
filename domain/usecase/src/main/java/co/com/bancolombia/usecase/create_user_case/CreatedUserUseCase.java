@@ -3,7 +3,7 @@ package co.com.bancolombia.usecase.create_user_case;
 import co.com.bancolombia.model.exception.DomainException;
 import co.com.bancolombia.model.user.User;
 import co.com.bancolombia.model.user.gateways.UserRepository;
-import co.com.bancolombia.usecase.util.UserValidatorUseCase;
+import co.com.bancolombia.usecase.valid_utils.UserValidatorUseCase;
 import lombok.RequiredArgsConstructor;
 import reactor.core.publisher.Mono;
 import static co.com.bancolombia.model.user.gateways.UserMessages.EMAIL_REGISTER;

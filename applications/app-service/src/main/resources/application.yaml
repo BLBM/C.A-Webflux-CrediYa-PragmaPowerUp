@@ -1,5 +1,5 @@
 server:
-  port: 8080
+  port: ${SERVER_PORT:8080}
 spring:
   application:
     name: "CrediYa"
@@ -25,8 +25,8 @@ springdoc:
     tagsSorter: alpha
 
 jwt:
-  secret: "YWRzYXNkYXNkYXNkYXNkYXNkYXNkYXNkYXNkYXNkYXNkYQ=="
-  expiration: "36000000"
+  secret: ${JWT_SECRET:YWRzYXNkYXNkYXNkYXNkYXNkYXNkYXNkYXNkYXNkYXNkYQ==}
+  expiration: ${JWT_EXPIRATION:36000000}
 
 management:
   endpoints:
@@ -41,9 +41,9 @@ cors:
   allowed-origins: "http://localhost:4200,http://localhost:8080"
 adapters:
   r2dbc:
-    host: localhost
-    port: 5432
-    database: autentication_db
-    schema: public
-    username: postgres
-    password: 1234
+    host: ${R2DBC_HOST:localhost}
+    port: ${R2DBC_PORT:5432}
+    database: ${R2DBC_DATABASE:authentication_db}
+    schema: ${R2DBC_SCHEMA:public}
+    username: ${R2DBC_USERNAME:postgres}
+    password: ${R2DBC_PASSWORD:1234}

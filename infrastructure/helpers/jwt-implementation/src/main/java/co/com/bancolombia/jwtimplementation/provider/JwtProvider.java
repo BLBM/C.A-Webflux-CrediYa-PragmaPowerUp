@@ -44,7 +44,7 @@ public class JwtProvider {
                 .subject(userLogin.getUsername())
                 .claim("roles", roles)
                 .issuedAt(new Date())
-                .expiration(new Date(new Date().getTime() + expiration))
+                .expiration(new Date(new Date().getTime() + expiration * 60_000L))
                 .signWith(getKey(secretKey))
                 .compact();
     }

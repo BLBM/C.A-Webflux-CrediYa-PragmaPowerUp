@@ -1,7 +1,19 @@
-FROM eclipse-temurin:21-jdk-alpine
-VOLUME /tmp
-COPY *.jar CrediYa.jar
-ENV JAVA_OPTS=" -Xshareclasses:name=cacheapp,cacheDir=/cache,nonfatal -XX:+UseContainerSupport -XX:MaxRAMPercentage=70 -Djava.security.egd=file:/dev/./urandom"
-# Replace with a non-root user to avoid running the container with excessive privileges
+# Etapa 1: build con Gradle 8.9 y JDK 21
+FROM gradle:8.9-jdk21 AS build
+
+WORKDIR /app
+COPY . .
+
+RUN ./gradlew :app-service:bootJar -x validateStructure --no-daemon
+
+# Etapa 2: runtime con Java 21 (más liviana que full JDK)
+FROM eclipse-temurin:21-jre-jammy
+
+WORKDIR /app
+COPY --from=build /app/applications/app-service/build/libs/*.jar app.jar
+
+RUN adduser --disabled-password --gecos '' appuser && chown -R appuser /app
 USER appuser
-ENTRYPOINT [ "sh", "-c", "java $JAVA_OPTS  -jar CrediYa.jar" ]
+
+EXPOSE 8080
+ENTRYPOINT ["java", "-jar", "app.jar"]

@@ -1,4 +1,4 @@
-package co.com.bancolombia.usecase.util;
+package co.com.bancolombia.usecase.valid_utils;
 
 import co.com.bancolombia.model.exception.DomainException;
 import co.com.bancolombia.model.user.User;

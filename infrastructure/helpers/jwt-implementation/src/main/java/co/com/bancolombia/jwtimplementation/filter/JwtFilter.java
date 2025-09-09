@@ -58,7 +58,7 @@ public class JwtFilter implements WebFilter {
 
         if (!jwtProvider.validate(token)) {
             log.warn(LogConstants.ERROR_PROCESS, JwtMessages.TOKEN_INVALID);
-            return Mono.error(new JwtException(JwtMessages.TOKEN_INVALID));
+            return Mono.error(new JwtException(JwtMessages.TOKEN_INVALID_IN_VALIDATE));
         }
 
         Authentication authentication = jwtProvider.getAuthentication(token);
