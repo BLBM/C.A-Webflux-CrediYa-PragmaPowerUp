@@ -1,6 +1,7 @@
 package co.com.bancolombia.api.exception;
 
 import co.com.bancolombia.logconstants.LogConstants;
+import co.com.bancolombia.model.exception.AuthException;
 import co.com.bancolombia.model.exception.DomainException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -27,6 +28,20 @@ public class GlobalExceptionHandler {
         Map<String, Object> body = new HashMap<>();
         body.put(LogConstants.TIMESTAMP_ERROR,LocalDateTime.now());
         body.put(LogConstants.DOMAIN_ERROR, LogConstants.DOMAIN_ERROR_MESSAGE);
+        body.put(LogConstants.MESSAGE_ERROR, ex.getMessage());
+
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(body);
+    }
+
+
+    @ExceptionHandler(AuthException.class)
+    public ResponseEntity<Map<String, Object>> handleDomainException(AuthException ex) {
+
+        log.error(LogConstants.AUTH_ERROR,ex.getMessage());
+
+        Map<String, Object> body = new HashMap<>();
+        body.put(LogConstants.TIMESTAMP_ERROR,LocalDateTime.now());
+        body.put(LogConstants.AUTH_ERROR, LogConstants.AUTH_ERROR_MESSAGE);
         body.put(LogConstants.MESSAGE_ERROR, ex.getMessage());
 
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(body);

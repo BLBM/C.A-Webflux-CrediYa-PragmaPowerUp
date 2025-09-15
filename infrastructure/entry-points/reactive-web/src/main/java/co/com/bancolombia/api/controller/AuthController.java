@@ -12,7 +12,6 @@ import co.com.bancolombia.jwtimplementation.provider.JwtProvider;
 import co.com.bancolombia.usecase.auth_use_case.AuthUseCase;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -40,7 +39,7 @@ public class AuthController {
 
         return  authUseCase.authenticate(UserLoginMapper.INSTANCE.toDomain(request))
                 .doOnSuccess(u -> log.info(LogConstants.USER_AUTHENTICATED, request.email()))
-                .doOnError(e -> log.error(LogConstants.ERROR_AUTHENTICATED,request.email()))
+                .doOnError(e -> log.error(LogConstants.ERROR_AUTHENTICATED, request.email()))
                 .map(userLogin ->
                         UserLoginMapper.INSTANCE.toResponse(
                                 UserLoginMapper.INSTANCE.toCustomUserLogin(userLogin),jwtProvider

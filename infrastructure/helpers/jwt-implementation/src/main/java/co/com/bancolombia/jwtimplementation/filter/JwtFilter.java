@@ -10,6 +10,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.server.reactive.ServerHttpRequest;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.ReactiveSecurityContextHolder;
 import org.springframework.stereotype.Component;
@@ -18,6 +19,7 @@ import org.springframework.web.server.WebFilter;
 import org.springframework.web.server.WebFilterChain;
 import reactor.core.publisher.Mono;
 
+import java.net.InetSocketAddress;
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
 
@@ -37,6 +39,24 @@ public class JwtFilter implements WebFilter {
 
         String path = exchange.getRequest().getPath().value();
         ServerHttpRequest request = exchange.getRequest();
+
+        InetSocketAddress remoteAddress = request.getRemoteAddress();
+        String ip = (remoteAddress != null) ? remoteAddress.getAddress().getHostAddress() : "unknown";
+        String userAgent = request.getHeaders().getFirst(HttpHeaders.USER_AGENT);
+        String forwardedFor = request.getHeaders().getFirst("X-Forwarded-For");
+
+        if (PublicPaths.isPublic(path)) {
+            log.info("Skipping JWT filter for public path: {}", path);
+            return chain.filter(exchange);
+        }
+
+        log.info("Incoming request -> path: {}, method: {}, ip: {}, X-Forwarded-For: {}, User-Agent: {}",
+                request.getPath().value(),
+                request.getMethod(),
+                ip,
+                forwardedFor,
+                userAgent
+        );
 
         if (PublicPaths.isPublic(path)) {
             return chain.filter(exchange);
@@ -61,7 +81,13 @@ public class JwtFilter implements WebFilter {
             return Mono.error(new JwtException(JwtMessages.TOKEN_INVALID_IN_VALIDATE));
         }
 
+
         Authentication authentication = jwtProvider.getAuthentication(token);
+
+
+        if (authentication.getCredentials() == null) {
+            return Mono.error(new BadCredentialsException("Missing JWT token"));
+        }
 
         return chain.filter(exchange)
                 .contextWrite(ReactiveSecurityContextHolder.withAuthentication(authentication));

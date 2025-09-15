@@ -1,7 +1,9 @@
 package co.com.bancolombia.config;
 
 import co.com.bancolombia.jwtimplementation.filter.JwtFilter;
+import co.com.bancolombia.jwtimplementation.provider.JwtProvider;
 import co.com.bancolombia.jwtimplementation.security_context_repository.SecurityContextRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
@@ -14,6 +16,7 @@ import org.springframework.security.web.server.SecurityWebFilterChain;
 import org.springframework.security.web.server.authentication.HttpStatusServerEntryPoint;
 import org.springframework.security.web.server.authorization.HttpStatusServerAccessDeniedHandler;
 
+@Slf4j
 @Configuration
 @EnableWebFluxSecurity
 @EnableReactiveMethodSecurity
@@ -22,9 +25,9 @@ public class SecurityConfig {
     private final SecurityContextRepository securityContextRepository;
 
 
+
     public SecurityConfig(SecurityContextRepository securityContextRepository) {
         this.securityContextRepository = securityContextRepository;
-
     }
 
     @Bean
@@ -39,6 +42,7 @@ public class SecurityConfig {
                 .authorizeExchange(exchange ->exchange
                         .pathMatchers("/api/v1/login").permitAll()
                         .pathMatchers("/swagger-ui/**", "/v3/api-docs/**", "/webjars/**").permitAll()
+                        .pathMatchers("/actuator/**").permitAll()
                         .anyExchange().authenticated())
                 .addFilterAt(jwtFilter, SecurityWebFiltersOrder.FIRST)
                 .securityContextRepository(securityContextRepository)
@@ -50,8 +54,8 @@ public class SecurityConfig {
                         .accessDeniedHandler(new HttpStatusServerAccessDeniedHandler(HttpStatus.FORBIDDEN))
                 )
                 .build();
+
+
+
     }
-
-
-
 }

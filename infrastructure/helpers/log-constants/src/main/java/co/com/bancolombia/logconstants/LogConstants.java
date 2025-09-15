@@ -36,8 +36,10 @@ public interface LogConstants {
     String SERVER_ERROR_MESSAGE = "An internal error has occurred. Please try again later.";
     String DOMAIN_ERROR_MESSAGE = "Domain error";
     String AUTH_ERROR = "auth error: {}";
+    String AUTH_ERROR_MESSAGE = "error of authenticated user";
     String AUTH_ERROR_MESSAGE_FORBIDDEN = "You don’t have permission to perform this action";
     String AUTH_ERROR_MESSAGE_UNAUTHORIZED = "bad authorized";
+    String CREDENTIALS_INVALID = "credentials invalid {}";
 
 
 

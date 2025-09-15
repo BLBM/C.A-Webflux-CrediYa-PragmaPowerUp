@@ -33,6 +33,7 @@ public class JwtProvider {
     @Value("${jwt.expiration}")
     private Integer expiration;
 
+
     public String generateToken(CustomUserLogin userLogin) {
         log.info(LogConstants.START_JJWT_PROCESS);
         List<String> roles = userLogin.getAuthorities()

@@ -12,7 +12,10 @@ public enum PublicPaths {
     LOGIN("/api/v1/login"),
     SWAGGER_UI("/swagger-ui/**"),
     SWAGGER_API_DOCS("/v3/api-docs/**"),
-    WEBJARS("/webjars/**");
+    WEBJARS("/webjars/**"),
+    ACTUATOR("/actuator"),
+    FAVICON("/favicon.ico");
+
 
     private final String path;
     PublicPaths(String path) { this.path = path; }
@@ -20,6 +23,6 @@ public enum PublicPaths {
 
     public static boolean isPublic(String requestPath) {
         return Arrays.stream(values())
-                .anyMatch(p -> requestPath.startsWith(p.getPath().replace("/**", "")));
+                .anyMatch(p -> requestPath.startsWith(p.getPath()));
     }
 }

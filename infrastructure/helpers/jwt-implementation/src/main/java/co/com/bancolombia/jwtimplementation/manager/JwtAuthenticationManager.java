@@ -3,6 +3,7 @@ package co.com.bancolombia.jwtimplementation.manager;
 import co.com.bancolombia.logconstants.LogConstants;
 import co.com.bancolombia.jwtimplementation.provider.JwtProvider;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.ReactiveAuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -18,32 +19,47 @@ import java.util.Map;
 public class JwtAuthenticationManager implements ReactiveAuthenticationManager {
 
     private final JwtProvider jwtProvider;
+
     public JwtAuthenticationManager(JwtProvider jwtProvider) {
         this.jwtProvider = jwtProvider;
     }
 
     @Override
-    public Mono<Authentication> authenticate (Authentication authentication) {
+    public Mono<Authentication> authenticate(Authentication authentication) {
         log.info(LogConstants.START_JJWT_PROCESS);
-        return Mono.just(authentication)
-                .map(auth -> jwtProvider.getClaims((auth.getCredentials().toString())))
-                .log()
-                .onErrorResume(e-> Mono.error(new Throwable("bad token")))
-                .map(claims -> {
-                    @SuppressWarnings("unchecked")
-                    List<Map<String, Object>> rawRoles = claims.get("roles", List.class);
 
-                    List<SimpleGrantedAuthority> authorities = rawRoles.stream()
-                            .map(role -> (String) role.get("name"))
-                            .map(SimpleGrantedAuthority::new)
-                            .toList();
+        return Mono.justOrEmpty(authentication)
+                .flatMap(auth -> {
+                    if (auth.getCredentials() == null) {
+                        log.info("No JWT token found in credentials, skipping authentication");
+                        return Mono.empty();
+                    }
 
-                    return new UsernamePasswordAuthenticationToken(
-                            claims.getSubject(),
-                            null,
-                            authorities
-                    );
+                    String token = auth.getCredentials().toString();
+
+                    try {
+                        var claims = jwtProvider.getClaims(token);
+
+                        @SuppressWarnings("unchecked")
+                        List<Map<String, Object>> rawRoles = claims.get("roles", List.class);
+
+                        List<SimpleGrantedAuthority> authorities = rawRoles.stream()
+                                .map(role -> (String) role.get("name"))
+                                .map(SimpleGrantedAuthority::new)
+                                .toList();
+
+                        return Mono.just(
+                                new UsernamePasswordAuthenticationToken(
+                                        claims.getSubject(),
+                                        token,
+                                        authorities
+                                )
+                        );
+                    } catch (Exception e) {
+                        log.error("JWT validation error: {}", e.getMessage());
+                        return Mono.error(new BadCredentialsException("Invalid JWT token", e));
+                    }
                 });
     }
-
 }
+

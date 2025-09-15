@@ -1,0 +1,31 @@
+server:
+  port: ${SERVER_PORT:8080}
+
+spring:
+  application:
+    name: "CrediYa"
+  r2dbc:
+    url: r2dbc:postgresql://${R2DBC_HOST}:${R2DBC_PORT}/${R2DBC_DATABASE}?ssl=true&sslMode=require
+    properties:
+      schema: ${R2DBC_SCHEMA:public}
+    username: ${R2DBC_USERNAME}
+    password: ${R2DBC_PASSWORD} 
+  main:
+    web-application-type: reactive
+
+jwt:
+  secret: ${JWT_SECRET}
+  expiration: ${JWT_EXPIRATION:36000000}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,prometheus
+  endpoint:
+    health:
+      probes:
+        enabled: true
+
+cors:
+  allowed-origins: "https://tudominio.com,https://<ALB-DNS>"
