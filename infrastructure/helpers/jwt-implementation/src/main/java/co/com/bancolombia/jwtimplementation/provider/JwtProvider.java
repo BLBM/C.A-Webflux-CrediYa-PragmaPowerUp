@@ -119,7 +119,7 @@ public class JwtProvider {
 
         return new UsernamePasswordAuthenticationToken(
                 claims.getSubject(),
-                null,
+                token,
                 authorities
         );
     }

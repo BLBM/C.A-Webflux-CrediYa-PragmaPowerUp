@@ -47,3 +47,4 @@ adapters:
     schema: ${R2DBC_SCHEMA}
     username: ${R2DBC_USERNAME}
     password: ${R2DBC_PASSWORD}
+

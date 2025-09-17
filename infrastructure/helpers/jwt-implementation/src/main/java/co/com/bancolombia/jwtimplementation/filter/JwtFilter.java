@@ -45,6 +45,7 @@ public class JwtFilter implements WebFilter {
         String userAgent = request.getHeaders().getFirst(HttpHeaders.USER_AGENT);
         String forwardedFor = request.getHeaders().getFirst("X-Forwarded-For");
 
+
         if (PublicPaths.isPublic(path)) {
             log.info("Skipping JWT filter for public path: {}", path);
             return chain.filter(exchange);
@@ -58,12 +59,7 @@ public class JwtFilter implements WebFilter {
                 userAgent
         );
 
-        if (PublicPaths.isPublic(path)) {
-            return chain.filter(exchange);
-        }
-
         String auth = request.getHeaders().getFirst(HttpHeaders.AUTHORIZATION);
-
 
         if (auth == null) {
             log.warn(JwtMessages.JJWT_ERROR_PROCESS, JwtMessages.TOKEN_NO_FOUNDS);

@@ -4,14 +4,18 @@ server:
 spring:
   application:
     name: "CrediYa"
-  r2dbc:
-    url: r2dbc:postgresql://${R2DBC_HOST}:${R2DBC_PORT}/${R2DBC_DATABASE}?ssl=true&sslMode=require
-    properties:
-      schema: ${R2DBC_SCHEMA:public}
-    username: ${R2DBC_USERNAME}
-    password: ${R2DBC_PASSWORD} 
   main:
     web-application-type: reactive
+
+springdoc:
+  api-docs:
+    enabled: true
+    path: /v3/api-docs
+  swagger-ui:
+    enabled: true
+    path: /swagger-ui.html
+    operationsSorter: method
+    tagsSorter: alpha
 
 jwt:
   secret: ${JWT_SECRET}
@@ -29,3 +33,12 @@ management:
 
 cors:
   allowed-origins: "https://tudominio.com,https://<ALB-DNS>"
+
+adapters:
+  r2dbc:
+    host: ${R2DBC_HOST}
+    port: ${R2DBC_PORT}
+    database: ${R2DBC_DATABASE}
+    schema: ${R2DBC_SCHEMA}
+    username: ${R2DBC_USERNAME}
+    password: ${R2DBC_PASSWORD}

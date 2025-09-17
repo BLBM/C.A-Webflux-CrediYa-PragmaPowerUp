@@ -1,7 +1,6 @@
 package co.com.bancolombia.config;
 
 import co.com.bancolombia.jwtimplementation.filter.JwtFilter;
-import co.com.bancolombia.jwtimplementation.provider.JwtProvider;
 import co.com.bancolombia.jwtimplementation.security_context_repository.SecurityContextRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
@@ -41,10 +40,13 @@ public class SecurityConfig {
                 .csrf(ServerHttpSecurity.CsrfSpec::disable)
                 .authorizeExchange(exchange ->exchange
                         .pathMatchers("/api/v1/login").permitAll()
-                        .pathMatchers("/swagger-ui/**", "/v3/api-docs/**", "/webjars/**").permitAll()
+                        .pathMatchers("/swagger-ui/**", "/swagger-ui.html").permitAll()
+                        .pathMatchers("/v3/api-docs/**").permitAll()
+                        .pathMatchers("/webjars/**").permitAll()
                         .pathMatchers("/actuator/**").permitAll()
+                        .pathMatchers("/favicon.ico").permitAll()
                         .anyExchange().authenticated())
-                .addFilterAt(jwtFilter, SecurityWebFiltersOrder.FIRST)
+                .addFilterBefore(jwtFilter, SecurityWebFiltersOrder.AUTHENTICATION)
                 .securityContextRepository(securityContextRepository)
                 .httpBasic(ServerHttpSecurity.HttpBasicSpec::disable)
                 .formLogin(ServerHttpSecurity.FormLoginSpec::disable)
